@@ -1,5 +1,5 @@
 {
-  "name": "jwt-auth-boilerplate",
+  "name": "project-4",
   "version": "1.0.0",
   "description": "Functional JWT Authentication Backend",
   "main": "server.js",
@@ -18,5 +18,14 @@
     "helmet": "^3.16.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.4.19"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sangchoi/project-4.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sangchoi/project-4/issues"
+  },
+  "homepage": "https://github.com/sangchoi/project-4#readme"
 }

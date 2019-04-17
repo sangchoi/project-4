@@ -21,7 +21,8 @@ const userSchema = new Schema({
         required: [true, 'You must enter an email'],
         minlength: [5, 'Email must be between 5 and 99 characters'],
         maxlength: [99, 'Email must be between 5 and 99 characters']
-    }
+    },
+    cart: [{type: Schema.Types.ObjectId, ref: 'Cart'}]
 });
 
 // This returns an object without a password
@@ -32,7 +33,8 @@ userSchema.set('toObject', {// every time we send the user json object over the 
         let returnJson = {
             _id: ret._id,
             email: ret.email,
-            name: ret.name
+            name: ret.name,
+            cart: ret.cart
         }
         return returnJson;
     }
