@@ -5,8 +5,7 @@ const herbSchema = new Schema({
     name: String,
     description: String,
     cost: Number,
-    image: String,
-    ailment: [{type: Schema.Types.ObjectId, ref: 'Ailment'}]
+    image: String
 })
 
 module.exports = mongoose.model('Herb', herbSchema);

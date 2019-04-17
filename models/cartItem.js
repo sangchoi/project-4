@@ -6,4 +6,4 @@ const cartItemSchema = new Schema({
     quantity: Number
 })
 
-module.exports = mongoose.model('CartId', cartSchema);
+module.exports = mongoose.model('CartItem', cartItemSchema);

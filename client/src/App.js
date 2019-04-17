@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
+
+// NPM PACKAGES
+import axios from 'axios';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom'
+
+// REACT COMPONENTS
 import Signup from './Signup';
 import Login from './Login';
 import UserProfile from './UserProfile';
-import axios from 'axios';
 
 class App extends Component {
   constructor(props) {

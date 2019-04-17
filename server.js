@@ -43,6 +43,13 @@ app.use('/locked',
         expressJWT({secret: process.env.JWT_SECRET}).unless({method: 'POST'}), 
         require('./routes/locked'))
 
+app.use('/user', require('./routes/user'));
+app.use('/herbs', require('./routes/herbs'));
+app.use('/ailments', require('./routes/ailments'));
+
+
+
+
 
 app.listen(process.env.PORT, () => {
     console.log(`You are listening to the sweet sounds of port ${process.env.PORT} in the morning...`)
