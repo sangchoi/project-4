@@ -32,7 +32,7 @@ router.get('/:uid/cart', (req, res) => {
 // POST - adding a cart item to the cart
 router.post('/:uid/cart/:cid', (req, res) => {
     let newCartItem = new CartItem({
-        quantity: req.body.quantity,
+        quantity: 1,
         herb: req.body.herbId
     }); 
     newCartItem.save((err, cartItem) => {

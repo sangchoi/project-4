@@ -3,12 +3,19 @@ import './App.css';
 
 // NPM PACKAGES
 import axios from 'axios';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 
-// REACT COMPONENTS
+// REACT COMPONENTS - AUTH
 import Signup from './Signup';
 import Login from './Login';
 import UserProfile from './UserProfile';
+
+// REACT COMPONENTS 
+import AilmentsPage from './AilmentsPage';
+import AilmentShowPage from './AilmentShowPage';
+import CartPage from './CartPage';
+
+
 
 class App extends Component {
   constructor(props) {
@@ -17,12 +24,17 @@ class App extends Component {
       token: '',
       user: null,
       errorMessage: '',
-      lockedResult: ''
+      lockedResult: '',
+      ailments: [],
+      herbs: [],
+      cart: null,
+      userCart: []
     }
     this.liftTokenToState = this.liftTokenToState.bind(this)
     this.checkForLocalToken = this.checkForLocalToken.bind(this)
     this.logout = this.logout.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.addItem = this.addItem.bind(this)
   }
 
   checkForLocalToken() {
@@ -50,21 +62,57 @@ class App extends Component {
             // Put token in state
             this.setState({
               token: res.data.token,
-              user: res.data.user
+              user: res.data.user,
+              cart: res.data.user.cart[0]
             })
           }
         })
     }
   }
 
+  getAilments = () => {
+    axios.get('/ailments')
+    .then(res => {
+        this.setState({
+            ailments: res.data
+        })
+    })
+  }
+
+  addItem(herb) {
+    console.log('IT IS CLICKED' + herb)
+    let cart = this.state.user.cart.filter( c => c.closeDate == null )[0]
+    axios.post(`/user/${this.state.user._id}/cart/${cart._id}`,{
+      herbId: herb
+    })
+    .then(res => {
+      this.setState({
+        cart: res.data
+      })
+    })
+  }
+
+  // getCart = () => {
+  //   axios.get(`/user/${this.state.user._id}/cart`)
+  //   .then(res => {
+  //     this.setState({
+  //       cart: res.data
+  //     })
+  //   }).catch(err => console.log(err, "there is an error in getCart"))
+  // }
+
   componentDidMount() {
     this.checkForLocalToken()
+    this.getAilments()
   }
+
+
 
   liftTokenToState(data) {
     this.setState({
       token: data.token,
-      user: data.user
+      user: data.user,
+      cart: data.user.cart[0]
     })
   }
 
@@ -100,11 +148,15 @@ class App extends Component {
     let contents;
     if (user) {
       contents = (
-        <>
+        <Router>
+          <Route exact path='/' render= {() => <Redirect to="/ailments" /> } />
+          <Route exact path="/ailments" render={() => <AilmentsPage ailments={this.state.ailments} user={user} logout={this.logout}/>}/>
+          <Route path="/ailments/:aid" render={(props) => <AilmentShowPage ailments={this.state.ailments} addItem={this.addItem} user={user} logout={this.logout} {...props} />}/>
+          <Route path="/cart" render={() => <CartPage cart={this.state.cart} />}/>
           <UserProfile user={user} logout={this.logout} />
-          <p><a onClick={this.handleClick}>Test the protected route...</a></p>
+          {/* <p><a onClick={this.handleClick}>Test the protected route...</a></p> */}
           <p>{this.state.lockedResult}</p>
-        </>
+        </Router>
       )
     } else {
       contents = (
@@ -119,10 +171,9 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header><h1>Welcome to my Site!</h1></header>
-        <div className="content-box">
+
           {contents}
-        </div>
+
       </div>
     );
   }

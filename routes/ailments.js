@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 // GET all ailments
 router.get('/', (req, res) => {
-    Ailment.find({}, (err, ailments) => {
+    Ailment.find({}).populate('herbs').exec( (err, ailments) => {
         if (!err) {
             res.status(200).json(ailments);
         } else {
@@ -16,8 +16,8 @@ router.get('/', (req, res) => {
 })
 
 // GET one ailment with herbs
-router.get('/:aid', (req, res) => {
-    Ailment.findById(req.params.id).populate('herbs').exec((err, ailment) => {
+router.get('/:aid/herbs', (req, res) => {
+    Ailment.findById(req.params.aid).populate('herbs').exec((err, ailment) => {
         if (!err) {
             res.status(200).json(ailment);
         } else {

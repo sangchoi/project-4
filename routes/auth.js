@@ -39,7 +39,9 @@ router.post('/signup', (req, res) => {
 // Route for login
 router.post('/login', (req, res) => {
     // Find user in db
-    User.findOne({email: req.body.email}, (err, user) => {
+    User.findOne({email: req.body.email})
+        .populate({path:'cart', populate: {path: 'cartItems', populate: {path: 'herb'}}})
+        .exec((err, user) => {
         if (!user) {
             // if no user, return error
             res.json({type: 'error', message: 'Account not found'})//made up token we're sending back
@@ -76,15 +78,17 @@ router.post('/me/from/token', (req, res) => {
             } else {
                 // If token is valid...
                 //   Look up the user in the db
-                User.findById(user._id, (err, user) => {
-                    if (err) {
-                        //   If user doesn't exist, return an error
-                        res.json({type: 'error', message: 'Database error during validation.'})
-                    } else {
-                        //   If user exists, send user and token back to 
-                        res.json({type: 'success', user: user.toObject(), token});
-                    }
-                })
+                User.findById(user._id)
+                    .populate({path:'cart', populate: {path: 'cartItems', populate: {path: 'herb'}}})
+                    .exec((err, user) => {
+                        if (err) {
+                            //   If user doesn't exist, return an error
+                            res.json({type: 'error', message: 'Database error during validation.'})
+                        } else {
+                            //   If user exists, send user and token back to 
+                            res.json({type: 'success', user: user.toObject(), token});
+                        }
+                    })
             }
         })
     }
