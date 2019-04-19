@@ -14,6 +14,7 @@ import UserProfile from './UserProfile';
 import AilmentsPage from './AilmentsPage';
 import AilmentShowPage from './AilmentShowPage';
 import CartPage from './CartPage';
+import Background from './Background';
 
 
 
@@ -28,13 +29,16 @@ class App extends Component {
       ailments: [],
       herbs: [],
       cart: null,
-      userCart: []
+      userCart: [],
+      quantity: 1
     }
     this.liftTokenToState = this.liftTokenToState.bind(this)
     this.checkForLocalToken = this.checkForLocalToken.bind(this)
     this.logout = this.logout.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.addItem = this.addItem.bind(this)
+    this.deleteItem = this.deleteItem.bind(this)
+    this.handleQuantity = this.handleQuantity.bind(this)
   }
 
   checkForLocalToken() {
@@ -90,6 +94,35 @@ class App extends Component {
         cart: res.data
       })
     })
+  }
+
+  // handleQuantityChange(e) {
+  //   this.setState({
+  //   quantity: e.target.value
+  //   })
+  // }
+
+  handleQuantity(e,data) {
+    e.preventDefault();
+    let cart = this.state.user.cart.filter( c => c.closeDate == null )[0]
+    // let cartItem = this.state.user.cart[0].cartItem 
+    let cartItem = data.id
+    console.log("THIS IS THE CART" + cart, cartItem, data.quantity)
+    axios.put(`/user/${this.state.user._id}/cart/${cart._id}/cartitems/${cartItem}`, {
+      quantity: data.quantity
+    })
+  }
+
+  deleteItem(e, cartItem) {
+    e.preventDefault();
+    let cart = this.state.user.cart.filter( c => c.closeDate == null )[0]
+    axios.delete(`/user/${this.state.user._id}/cart/${cart._id}/cartitems/${cartItem}`)
+      .then( res => {
+        this.setState({
+          user: res.data,
+          cart: res.data.cart[0]
+        })
+      })
   }
 
   // getCart = () => {
@@ -149,10 +182,14 @@ class App extends Component {
     if (user) {
       contents = (
         <Router>
+          <nav className="Navigation">
+            <Link className="Navigation" to='/ailments'>Ailments</Link> |{' '}
+            <Link className="Navigation" to='/cart'>Shopping Cart</Link>
+          </nav>
           <Route exact path='/' render= {() => <Redirect to="/ailments" /> } />
           <Route exact path="/ailments" render={() => <AilmentsPage ailments={this.state.ailments} user={user} logout={this.logout}/>}/>
           <Route path="/ailments/:aid" render={(props) => <AilmentShowPage ailments={this.state.ailments} addItem={this.addItem} user={user} logout={this.logout} {...props} />}/>
-          <Route path="/cart" render={() => <CartPage cart={this.state.cart} />}/>
+          <Route path="/cart" render={() => <CartPage deleteItem={this.deleteItem} handleQuantityChange={this.handleQuantityChange} handleQuantity={this.handleQuantity} cart={this.state.cart} />}/>
           <UserProfile user={user} logout={this.logout} />
           {/* <p><a onClick={this.handleClick}>Test the protected route...</a></p> */}
           <p>{this.state.lockedResult}</p>
@@ -160,10 +197,18 @@ class App extends Component {
       )
     } else {
       contents = (
-        <>
-        <Signup liftToken={this.liftTokenToState} />
-        <Login liftToken={this.liftTokenToState} />
-        </>
+        <div className="SplashPage">
+          <h1 className="Petrichor">PETRICHOR</h1>
+          <div className="BackgroundDiv">
+          <Background />
+          </div>
+          <div className="SignUpDiv">
+          <Signup liftToken={this.liftTokenToState} />
+          </div>
+          <div className="LoginDiv">
+          <Login liftToken={this.liftTokenToState} />
+          </div>
+        </div>
       )
     }
 

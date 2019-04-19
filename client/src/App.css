@@ -1,33 +1,130 @@
 .App {
+  border: 1px red solid;
   text-align: center;
+
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
+.SplashPage {
+  border: 1px green solid;
+  font-family: 'Cherry Swash', cursive;
+  text-align: center;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin: 0;
+  background-color: rgba(153, 139, 89, 1);
+  display: grid;
+  grid-template-columns: .3fr auto;
+  grid-template-rows: .1fr .4fr auto;
+  grid-template-areas: "BackgroundDiv petrichorDiv"
+                      "BackgroundDiv signupDiv"
+                      "BackgroundDiv loginDiv";
+}
+
+.Petrichor {
+  border: 1px red solid;
+  grid-area: petrichorDiv;
+  font-family: 'Rye', cursive;
+  font-size: 5em;
+  letter-spacing: .2em;
+  margin: 50px auto;
+}
+
+.BackgroundDiv {
+  border: 1px red solid;
+  grid-area: BackgroundDiv;
+}
+
+.SignUpDiv {
+  border: 1px red solid;
+  grid-area: signupDiv;
+  /* display: inline-block; */
+}
+
+.LoginDiv {
+  border: 1px red solid;
+  grid-area: loginDiv;
+  /* display: inline-block; */
+}
+
+/* Login.jsx ------------------------------------------------------------------------- */
+
+.LoginText {
+  display: inline-block;
+  padding: 10px 10px 0 10px;
+  font-family: 'Cherry Swash', cursive;
+  font-size: 1em;
+}
+
+/* .LoginForm {
+  display: inline-block;
+} */
+
+.LoginInput {
+  margin: 0 5px 0 5px;
+  padding: 0 1px 0 1px;
+  border: none;
+  border-bottom: 1px solid rgb(7, 7, 7);
+  width: 500px;
+  height: 50px;
+  font-family: 'Cherry Swash', cursive;
+  font-size: 1em;
+  color: rgba(216, 177, 162, 1);
+  background-color: rgba(153, 139, 89, 1);
+}
+
+.LoginInput:focus {
+  outline: none;
+}
+
+.LoginButton {
+  margin: 10px 20px 0 5px;
+  width: 80px;
+  height: 30px;
+  border-radius: 12px;
+  border-color: rgba(216, 177, 162, 1);
+  background-color:  rgba(216, 177, 162, 1);
+  font-family: 'Cherry Swash', cursive;
+  font-size: 1em;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Signup.jsx ------------------------------------------------------------------------- */
+
+.SignupText {
+  display: inline-block;
+  padding: 10px 10px 0 10px;
+  font-family: 'Cherry Swash', cursive;
+  font-size: 1em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* .LoginForm {
+  display: inline-block;
+} */
+
+.SignupInput {
+  margin: 0 5px 0 5px;
+  padding: 0 1px 0 1px;
+  border: none;
+  border-bottom: 1px solid rgb(7, 7, 7);
+  width: 500px;
+  height: 50px;
+  font-family: 'Cherry Swash', cursive;
+  font-size: 1em;
+  color: rgba(216, 177, 162, 1);
+  background-color: rgba(153, 139, 89, 1);
+}
+
+.SignupInput:focus {
+  outline: none;
+}
+
+.SignupButton {
+  margin: 10px 20px 0 5px;
+  width: 80px;
+  height: 30px;
+  border-radius: 12px;
+  border-color: rgba(216, 177, 162, 1);
+  background-color:  rgba(216, 177, 162, 1);
+  font-family: 'Cherry Swash', cursive;
+  font-size: 1em;
+  color: white;
 }

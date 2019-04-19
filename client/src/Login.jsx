@@ -52,11 +52,11 @@ class Login extends Component {
     render() {
         return (
             <div className="Login">
-            <h3>Log into your account:</h3>
-                <form onSubmit={this.handleSubmit}>
-                <input onChange={this.handleEmailChange} value={this.state.email} type="email" name="email" placeholder="Enter your email..." /><br />
-                <input onChange={this.handlePasswordChange} value={this.state.password} type="password" name="password" placeholder="Enter your password" /><br />
-                <input type="submit" value="Log In!" />
+            <h3 className="LoginText">Log into your account:</h3>
+                <form className="LoginForm" onSubmit={this.handleSubmit}>
+                <input className="LoginInput" onChange={this.handleEmailChange} value={this.state.email} type="email" name="email" placeholder="Enter your email..." /><br />
+                <input className="LoginInput" onChange={this.handlePasswordChange} value={this.state.password} type="password" name="password" placeholder="Enter your password" /><br />
+                <input className="LoginButton" type="submit" value="Log In!" />
                 </form>
             </div>
         )

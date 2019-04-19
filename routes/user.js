@@ -66,21 +66,6 @@ router.post('/:uid/cart/:cid', (req, res) => {
     })
 })
 
-// // POST - adding a cart item to the cart
-// router.post('/:uid/cart/:cid', (req, res) => {
-//     Cart.findById(req.params.cid, (err, cart) => {
-//         let newCartItem = new CartItem({
-//             quantity: req.body.quantity,
-//             herb: req.body.herbId
-//         });
-//         newCartItem.save((err, cartItem) => {
-//             cart.cartItems.push(cartItem);
-//             cart.save((err, cart) => {
-//                 res.status(200).json(cart)
-//             })
-//         })
-//     })
-// })
 
 
 // UPDATE items in user's cart
@@ -105,7 +90,11 @@ router.delete('/:uid/cart/:cid/cartitems/:id', (req, res) => {
             if (err) res.json({err})
             cart.cartItems.pull(req.params.id)
             cart.save((err,doc) => {
-                res.json(cart)
+                User.findById(req.params.uid)
+                .populate({path:'cart', populate: {path: 'cartItems', populate: {path: 'herb'}}})
+                .exec((err, user) => {
+                    res.json(user)
+                })
             });
         });
     });
