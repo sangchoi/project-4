@@ -1,0 +1,26 @@
+.CartPage {
+    border: 1px green solid;
+    font-family: 'Cormorant Garamond', serif;
+    text-align: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: rgba(153, 139, 89, 1);
+    display: grid;
+    grid-template-columns: .3fr auto;
+    grid-template-rows: .1fr .4fr auto;
+    grid-template-areas: "BackgroundDiv cartpagenav"
+                        "BackgroundDiv cartname"
+                        "BackgroundDiv cartlist";
+  }
+
+.CartPageNav {
+    grid-area: cartpagenav;
+}
+
+.CartName {
+    grid-area: cartname;
+}
+
+.CartList {
+    grid-area: cartlist;
+}

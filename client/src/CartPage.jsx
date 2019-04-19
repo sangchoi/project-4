@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import CartItem from './CartItem';
+import NavBar from './NavBar';
 import './CartPage.css'
+import {Link} from 'react-router-dom';
+import Background from './Background';
 
 class CartPage extends Component {
 
@@ -34,8 +37,23 @@ class CartPage extends Component {
 
     return (
         <div className="CartPage">
-        <h1>CART PAGE</h1>
-        <h1>{cartList}</h1>
+            {/* <div className="CartPageNav">
+            <NavBar logout={this.props.logout} />
+            </div> */}
+            
+            <div className="BackgroundDiv">
+                <Background />
+                </div>
+                <div className="CartPageNav">
+            <Link to='/ailments'>
+                <button className="NavButton">AILMENTS</button>
+            </Link>
+            <Link to='/cart'>
+                <button className="NavButton">SHOPPING CART</button>
+            </Link>
+            </div>
+        <h1 className="CartName">SHOPPING CART</h1>
+        <h1 className="CartList">{cartList}</h1>
         </div>
     )}
 }

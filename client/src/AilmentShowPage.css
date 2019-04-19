@@ -1,0 +1,26 @@
+.AilmentShowPage {
+    border: 1px green solid;
+    font-family: 'Cormorant Garamond', serif;
+    text-align: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: rgba(153, 139, 89, 1);
+    display: grid;
+    grid-template-columns: .3fr auto;
+    grid-template-rows: .1fr .4fr auto;
+    grid-template-areas: "BackgroundDiv ailmentshownav"
+                        "BackgroundDiv ailmentname"
+                        "BackgroundDiv herbslist";
+  }
+
+.AilmentShowNav {
+    grid-area: ailmentshownav;
+}
+
+.AilmentName {
+    grid-area: ailmentname;
+}
+
+.HerbsList {
+    grid-area: herbslist;
+}

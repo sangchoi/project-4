@@ -1,0 +1,67 @@
+.AilmentsPage {
+    border: 1px green solid;
+    font-family: 'Cormorant Garamond', serif;
+    text-align: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: rgba(153, 139, 89, 1);
+    display: grid;
+    grid-template-columns: .3fr auto;
+    grid-template-rows: .1fr .4fr auto;
+    grid-template-areas: "BackgroundDiv navbar"
+                        "BackgroundDiv ailmentstext"
+                        "BackgroundDiv ailmentslist";
+  }
+
+/* .AilmentsPage {
+    font-family: 'Cormorant Garamond', serif;
+    background-color: rgba(153, 139, 89, 1);
+    min-height: 100vh;
+} */
+
+.AilmentsText {
+    font-family: 'Rye', cursive;
+    font-size: 3em;
+    grid-area: ailmentstext;
+}
+
+.AilmentsList {
+    text-transform: uppercase;
+    grid-area: ailmentslist;
+}
+
+.AilmentsListLinks {
+    display: inline-block;
+    margin: 10px 10px;
+    list-style-type: none;
+    font-size: 2em;
+    
+}
+
+/* NavBar.jsx ------------------------------------------------------------------------- */
+
+.AilmentsPageNave {
+    grid-area: navbar;
+}
+
+.NavButton {
+    margin: 10px 20px 0px 10px;
+    width: 200px;
+    height: 30px;
+    border-radius: 12px;
+    border-color: rgba(216, 177, 162, 1);
+    background-color:  rgba(216, 177, 162, 1);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1em;
+    color: white;
+   
+}
+
+.NavButton:hover {
+    border-color: rgba(255, 255, 255, 1);
+    background-color: rgb(34, 34, 34);
+}
+
+.NavButton:focus {
+    outline: none;
+}

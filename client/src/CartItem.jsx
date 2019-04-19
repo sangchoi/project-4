@@ -4,10 +4,18 @@ class CartItem extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            quantity: 0,
+            name: '',
+            id: ''
+        }
+    }
+    
+    componentDidMount() {
+        this.setState({
             quantity: this.props.quantity,
             name: this.props.herb.name,
             id: this.props.id
-        }
+        })
     }
 
     handleChange = (e) => {

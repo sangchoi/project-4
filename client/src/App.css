@@ -1,11 +1,11 @@
 .App {
-  border: 1px red solid;
+  /* border: 1px red solid; */
   text-align: center;
 
 }
 
 .SplashPage {
-  border: 1px green solid;
+  /* border: 1px green solid; */
   font-family: 'Cherry Swash', cursive;
   text-align: center;
   min-height: 100vh;
@@ -20,7 +20,7 @@
 }
 
 .Petrichor {
-  border: 1px red solid;
+  /* border: 1px red solid; */
   grid-area: petrichorDiv;
   font-family: 'Rye', cursive;
   font-size: 5em;
@@ -29,18 +29,18 @@
 }
 
 .BackgroundDiv {
-  border: 1px red solid;
+  /* border: 1px red solid; */
   grid-area: BackgroundDiv;
 }
 
 .SignUpDiv {
-  border: 1px red solid;
+  /* border: 1px red solid; */
   grid-area: signupDiv;
   /* display: inline-block; */
 }
 
 .LoginDiv {
-  border: 1px red solid;
+  /* border: 1px red solid; */
   grid-area: loginDiv;
   /* display: inline-block; */
 }
@@ -128,3 +128,4 @@
   font-size: 1em;
   color: white;
 }
+

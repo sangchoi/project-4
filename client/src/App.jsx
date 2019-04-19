@@ -28,7 +28,7 @@ class App extends Component {
       lockedResult: '',
       ailments: [],
       herbs: [],
-      cart: null,
+      cart: {cartItems:[]},
       userCart: [],
       quantity: 1
     }
@@ -182,14 +182,14 @@ class App extends Component {
     if (user) {
       contents = (
         <Router>
-          <nav className="Navigation">
-            <Link className="Navigation" to='/ailments'>Ailments</Link> |{' '}
-            <Link className="Navigation" to='/cart'>Shopping Cart</Link>
-          </nav>
+          {/* <nav className="NavigationDiv">
+            <Link className="NavigationLink" to='/ailments'>AILMENTS</Link> |{' '}
+            <Link className="NavigationLink" to='/cart'>SHOPPING CART</Link>
+          </nav> */}
           <Route exact path='/' render= {() => <Redirect to="/ailments" /> } />
           <Route exact path="/ailments" render={() => <AilmentsPage ailments={this.state.ailments} user={user} logout={this.logout}/>}/>
           <Route path="/ailments/:aid" render={(props) => <AilmentShowPage ailments={this.state.ailments} addItem={this.addItem} user={user} logout={this.logout} {...props} />}/>
-          <Route path="/cart" render={() => <CartPage deleteItem={this.deleteItem} handleQuantityChange={this.handleQuantityChange} handleQuantity={this.handleQuantity} cart={this.state.cart} />}/>
+          <Route path="/cart" render={() => <CartPage deleteItem={this.deleteItem} handleQuantityChange={this.handleQuantityChange} handleQuantity={this.handleQuantity} cart={this.state.cart} user={user} logout={this.logout}/>}/>
           <UserProfile user={user} logout={this.logout} />
           {/* <p><a onClick={this.handleClick}>Test the protected route...</a></p> */}
           <p>{this.state.lockedResult}</p>

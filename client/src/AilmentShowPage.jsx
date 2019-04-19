@@ -1,4 +1,8 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import Background from './Background';
+import './AilmentShowPage.css';
+import NavBar from './NavBar';
 
 
 const AilmentShowPage = (props) => {
@@ -19,8 +23,22 @@ const AilmentShowPage = (props) => {
     
     return(
         <div className="AilmentShowPage">
-        <h1>{ailment.name}</h1>
-        <ul>
+            {/* <div className="AilmentShowPageNav">
+            <NavBar logout={this.props.logout} />
+            </div> */}
+            <div className="BackgroundDiv">
+                <Background />
+                </div>
+            <div className="AilmentShowNav">
+            <Link to='/ailments'>
+                <button className="NavButton">AILMENTS</button>
+            </Link>
+            <Link to='/cart'>
+                <button className="NavButton">SHOPPING CART</button>
+            </Link>
+            </div>
+        <h1 className="AilmentName">{ailment.name}</h1>
+        <ul className="HerbsList">
             <li>{herbsList}</li>
             
         </ul>
