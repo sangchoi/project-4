@@ -8,6 +8,9 @@ const helmet = require('helmet');
 const app = express();
 // you can get form data
 app.use(express.urlencoded({extended: false}));
+// FOR HEROKU
+app.use(express.static(__dirname + '/client/build'));
+
 // you can get normal payload from ajax axios
 app.use(express.json());
 app.use(helmet());
@@ -26,7 +29,11 @@ const signupLimiter = new RateLimit({
     message: "Maximum accounts created. Please try again later."
 })
 
+// FOR PRODUCTION / FOR HEROKU
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
+
+
+
 const db = mongoose.connection;
 db.once('open', () => {
     console.log(`Connected to Mongo on ${db.host}:${db.port}`)
@@ -47,7 +54,10 @@ app.use('/user', require('./routes/user'));
 app.use('/herbs', require('./routes/herbs'));
 app.use('/ailments', require('./routes/ailments'));
 
-
+// FOR HEROKU
+app.get('*', function(req, res) {
+	res.sendFile(__dirname + '/client/build/index.html');
+});
 
 
 
