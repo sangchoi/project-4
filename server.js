@@ -55,9 +55,9 @@ app.use('/herbs', require('./routes/herbs'));
 app.use('/ailments', require('./routes/ailments'));
 
 // FOR HEROKU
-app.get('*', function(req, res) {
-	res.sendFile(__dirname + '/client/build/index.html');
-});
+// app.get('*', function(req, res) {
+// 	res.sendFile(__dirname + '/client/build/index.html');
+// });
 
 
 
